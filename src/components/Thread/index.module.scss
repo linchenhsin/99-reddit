@@ -1,0 +1,7 @@
+.card {
+  transition: 0s;
+  cursor: pointer;
+  &:hover {
+    border: thin solid #898989;
+  }
+}

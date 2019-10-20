@@ -1,0 +1,15 @@
+*.log
+node_modules
+.DS_Store
+.idea
+.env
+build/
+dist/
+lib/
+*.sublime-*
+redis_data
+rethinkdb_data
+db_data
+styleguide
+.vs
+.vscode

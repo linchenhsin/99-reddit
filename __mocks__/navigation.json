@@ -1,0 +1,24 @@
+{
+  "items":[
+    {
+      "key": "posts",
+      "title": "Posts",
+      "url": "/"
+    },
+    {
+      "key": "new",
+      "title": "New to Dota 2",
+      "url": "https://www.reddit.com/r/DotA2/wiki/faq#wiki_what_are_some_basic_tips_when_starting_to_play.3F"
+    },
+    {
+      "key": "faq",
+      "title": "Read the FAQ",
+      "url": "https://www.reddit.com/r/DotA2/wiki/faq"
+    },
+    {
+      "key": "rules",
+      "title": "Subreddit Rules",
+      "url": "https://www.reddit.com/r/DotA2/wiki/rules"
+    }
+  ]
+}

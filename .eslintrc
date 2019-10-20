@@ -1,0 +1,33 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["flowtype", "import"],
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "extends": ["airbnb", "plugin:flowtype/recommended"],
+  "rules": {
+    "import/no-unresolved": ["error", { "ignore": [".*"] }],
+    "arrow-parens": ["error", "as-needed"],
+    "comma-dangle": ["error", "always-multiline"],
+    "space-in-parens": ["error", "always"],
+    "computed-property-spacing": ["error", "always"],
+    "template-curly-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "always"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-curly-spacing": ["error", "always"],
+    "react/jsx-max-props-per-line": [1, { "maximum": 1 }],
+    "react/sort-comp": [
+      1,
+      {
+        "order": [
+          "type-annotations",
+          "static-methods",
+          "lifecycle",
+          "everything-else",
+          "render"
+        ]
+      }
+    ]
+  }
+}

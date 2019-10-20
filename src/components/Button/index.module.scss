@@ -1,0 +1,36 @@
+$size: 16px;
+
+.icon {
+  font-style: normal;
+  vertical-align: middle;
+  font-weight: 400;
+  height: $size;
+  width: $size;
+  font-size: $size;
+  line-height: $size;
+}
+
+.iconPadding {
+  margin-right: 4px;
+}
+
+.button {
+  transition: all 0s;
+  &:hover,
+  &:active,
+  &:focus {
+    color: #888a8c;
+    background-color: #e8e8e8;
+  }
+}
+
+.button + .button {
+  margin-left: 4px;
+}
+
+.text {
+  display: inline-block;
+  line-height: 1;
+  text-transform: capitalize;
+  vertical-align: middle;
+}

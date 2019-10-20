@@ -7,6 +7,8 @@ import Thread from '~/components/Thread';
 
 import { LAYOUT, VOTE } from '~/constants';
 
+import style from './index.module.scss';
+
 import type { ThreadModels } from '~/types';
 
 type Props = {
@@ -32,7 +34,7 @@ function Content( props: Props ) {
   } = props;
   console.log( widgets );
   return (
-    <div>
+    <div className={ style.container }>
       {
         threads.order.map( key => (
           <Thread

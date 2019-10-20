@@ -42,22 +42,24 @@ function Score( props: Props ) {
   } = props;
 
   return (
-    <div className={ `${ containerStyle[ layout ] } ${ style.container }` }>
-      <Button
-        type="upvote"
-        onClick={ onUpvote }
-        buttonStyle={ style.voteBtn }
-        iconStyle={ upvoteIconStyle[ vote ] }
-      />
-      <div className={ `${ style.score } ${ scoreStyle[ vote ] }` }>
-        { formatNumber( score ) }
+    <div className={ style.background }>
+      <div className={ `${ containerStyle[ layout ] } ${ style.container }` }>
+        <Button
+          type="upvote"
+          onClick={ onUpvote }
+          buttonStyle={ style.voteBtn }
+          iconStyle={ upvoteIconStyle[ vote ] }
+        />
+        <div className={ `${ style.score } ${ scoreStyle[ vote ] }` }>
+          { formatNumber( score ) }
+        </div>
+        <Button
+          type="downvote"
+          onClick={ onDownvote }
+          buttonStyle={ style.voteBtn }
+          iconStyle={ downvoteIconStyle[ vote ] }
+        />
       </div>
-      <Button
-        type="downvote"
-        onClick={ onDownvote }
-        buttonStyle={ style.voteBtn }
-        iconStyle={ downvoteIconStyle[ vote ] }
-      />
     </div>
   );
 }

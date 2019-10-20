@@ -1,0 +1,29 @@
+.container {
+  background-color: var(--newCommunityTheme-navBar-backgroundColor);
+  padding: 0 16px;
+}
+
+.card {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.link {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 32px;
+  display: inline-block;
+  color: var(--newCommunityTheme-navBar-inactiveLink);
+  margin: 0 5px;
+  padding: 4px 8px;
+  transition: color 0s;
+  &.active {
+    padding-bottom: 1px;
+    border-bottom: 3px solid currentColor;
+    color: var(--newCommunityTheme-navBar-activeLink);
+  }
+  &:hover,
+  &:focus {
+    color: var(--newCommunityTheme-navBar-hoverLink);
+  }
+}

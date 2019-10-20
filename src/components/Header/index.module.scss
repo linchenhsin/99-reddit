@@ -1,8 +1,6 @@
-@import "../../assets/styles/global.scss";
-
 .container {
   padding: 8px 16px;
-  background-color: $reddit-primary-color;
+  background-color: var(--newCommunityTheme-banner-backgroundColor);
   display: flex;
   align-items: center;
   &.background {
@@ -33,7 +31,7 @@
   width: 56px;
   border: white 2px solid;
   border-radius: 50%;
-  background-color: $reddit-primary-color;
+  background-color: var(--newCommunityTheme-banner-iconColor);
   margin-right: 8px;
 }
 

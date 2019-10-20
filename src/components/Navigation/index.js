@@ -3,9 +3,12 @@ import React from 'react';
 
 import { LAYOUT } from '~/constants';
 
+import style from './index.module.scss';
+
 type Item = {
   key: string,
   title: string,
+  url: string,
 }
 
 type Props = {
@@ -19,11 +22,21 @@ function Navigation( props: Props ) {
     layout, items, defaultSelectedKey,
   } = props;
   return (
-    <pre>
-      {JSON.stringify( {
-        layout, items, defaultSelectedKey,
-      }, null, 2 )}
-    </pre>
+    <div className={ style.container }>
+      <div className={ style[ layout ] }>
+        {
+          items.map( item => (
+            <a
+              key={ item.key }
+              href={ item.url }
+              className={ `${ style.link } ${ item.key === defaultSelectedKey ? style.active : '' } ` }
+            >
+              { item.title }
+            </a>
+          ) )
+        }
+      </div>
+    </div>
   );
 }
 

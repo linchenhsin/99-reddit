@@ -16,11 +16,12 @@ $size: 16px;
 
 .button {
   transition: all 0s;
+  color: var(--newCommunityTheme-actionIcon);
   &:hover,
   &:active,
   &:focus {
-    color: #888a8c;
-    background-color: #e8e8e8;
+    background-color: var(--newRedditTheme-navIconFaded10);
+    color: var(--newCommunityTheme-actionIcon);
   }
 }
 
@@ -33,4 +34,5 @@ $size: 16px;
   line-height: 1;
   text-transform: capitalize;
   vertical-align: middle;
+  color: var(--newCommunityTheme-postIcon);
 }

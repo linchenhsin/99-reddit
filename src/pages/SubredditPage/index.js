@@ -23,6 +23,9 @@ import Toolbar from '~/components/Toolbar';
 // types
 import type { SubredditAbout, ThreadModels } from '~/types';
 
+// style
+import style from './index.module.scss';
+
 // mock data
 import mockNav from '~/../__mocks__/navigation.json';
 
@@ -32,9 +35,11 @@ type Props = {
   about: SubredditAbout,
   layout: $Values<typeof LAYOUT>,
   sort: $Values<typeof SORT>,
+  mode: 'Light' | 'Dark',
   navItems: {
     "key": string,
     "title": string,
+    "url": string,
   }[];
   threadsModels: ThreadModels,
   threadsOrder: string[],
@@ -54,14 +59,16 @@ class SubredditPage extends Component<Props> {
 
   render() {
     const {
+      subreddit,
       dispatch,
       layout, sort,
       about,
       navItems,
       threadsModels, threadsOrder, threadsVotes,
+      mode = 'Light',
     } = this.props;
     return (
-      <>
+      <div className={ `SubredditVars${ mode }${ subreddit } ${ style.pageBody }` }>
         <Helmet>
           <title>{ about.title }</title>
         </Helmet>
@@ -103,7 +110,7 @@ class SubredditPage extends Component<Props> {
           }
           votes={ threadsVotes }
         />
-      </>
+      </div>
     );
   }
 }

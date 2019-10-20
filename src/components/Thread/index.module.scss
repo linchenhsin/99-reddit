@@ -1,7 +1,11 @@
 .card {
   transition: 0s;
   cursor: pointer;
+  border: 1px solid var(--newCommunityTheme-postLine);
+  transition: color 0.5s, fill 0.5s, box-shadow 0.5s;
+  transition-property: color, fill, box-shadow;
+  color: var(--newCommunityTheme-actionIcon);
   &:hover {
-    border: thin solid #898989;
+    border-color: var(--newCommunityTheme-postIcon);
   }
 }

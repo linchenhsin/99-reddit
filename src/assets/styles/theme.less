@@ -15,13 +15,19 @@
   src: url('../fonts/IBMPlexSansBold.woff2');
   font-weight: bold;
 }
+@import './subreddit-light.css';
+@import './subreddit-dark.css';
+@import './subreddit-light-DotA2.css';
+@import './subreddit-dark-DotA2.css';
 
 // -------- Colors -----------
 @primary-color: #888a8c;
 
 // Base background color for most components
+@component-background: var(--newCommunityTheme-body);
+@text-color: var(--newCommunityTheme-bodyText);
 @text-selection-bg: #bad5fb;
-@text-color-inverse: 'black';
+@text-color-inverse: var(--newCommunityTheme-bodyText);
 @font-family: IBMPlexSans, Arial, sans-serif;
 @font-size-base: 12px;
 @line-height-base: 1;

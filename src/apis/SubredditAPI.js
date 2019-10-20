@@ -22,12 +22,14 @@ class SubredditAPI {
       this.instance( {
         method: 'GET',
         url: `${ subreddit }/about.json`,
-      } ).then( ( response: {data: SubredditAboutData} ) => {
+      } ).then( ( response: { data: SubredditAboutData } ) => {
         const {
           data: {
             data: {
               description,
               header_img,
+              banner_background_color,
+              banner_background_image,
               icon_img,
               icon_size,
               id,
@@ -40,6 +42,8 @@ class SubredditAPI {
         const data = {
           description,
           headerImg: header_img,
+          bannerBackgroundColor: banner_background_color,
+          bannerBackgroundImage: banner_background_image,
           iconImg: icon_img,
           iconSize: [ icon_size[ 0 ], icon_size[ 1 ] ],
           id,
@@ -70,7 +74,7 @@ class SubredditAPI {
         method: 'GET',
         url: `${ subreddit }/${ sort }.json`,
         params,
-      } ).then( ( response: {data: SubredditSearchData} ) => {
+      } ).then( ( response: { data: SubredditSearchData } ) => {
         const {
           data: {
             data: {

@@ -39,6 +39,12 @@ module.exports = {
         exclude: /node_modules/,
         include: path.resolve( __dirname, './src' ),
       },
+      // .scss
+      {
+        test: /\.scss$/,
+        exclude: /\.module\.scss$/,
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ],
+      },
       // .module.scss
       {
         test: /\.module\.scss$/,
@@ -53,9 +59,7 @@ module.exports = {
               },
             },
           },
-          {
-            loader: 'sass-loader',
-          },
+          { loader: 'sass-loader' },
         ],
       },
       // css

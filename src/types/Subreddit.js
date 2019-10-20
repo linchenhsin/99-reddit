@@ -5,6 +5,8 @@ import { LOADING_STATUS } from '~/constants';
 export type SubredditAbout = {
   description: string,
   headerImg: string,
+  bannerBackgroundColor: string,
+  bannerBackgroundImage: string,
   iconImg: string,
   iconSize: [ number, number ],
   id: string,

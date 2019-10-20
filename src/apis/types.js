@@ -67,6 +67,8 @@ export type SubredditAboutData = {
   data: {
     description: string,
     header_img: string,
+    banner_background_color: string,
+    banner_background_image: string,
     icon_img: string,
     icon_size: [ number, number ],
     id: string,

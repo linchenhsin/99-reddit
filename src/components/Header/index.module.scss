@@ -1,0 +1,45 @@
+@import "../../assets/styles/global.scss";
+
+.container {
+  padding: 8px 16px;
+  background-color: $reddit-primary-color;
+  display: flex;
+  align-items: center;
+  &.background {
+    background: no-repeat center / cover;
+    background-position: center top;
+    height: 192px;
+    min-width: 260px;
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.card {
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+}
+
+.icon {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 56px;
+  width: 56px;
+  border: white 2px solid;
+  border-radius: 50%;
+  background-color: $reddit-primary-color;
+  margin-right: 8px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 26px;
+  color: #fcfcfb;
+}

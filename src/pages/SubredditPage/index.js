@@ -68,9 +68,10 @@ class SubredditPage extends Component<Props> {
         <Header
           layout={ layout }
           title={ about.displayNamePrefixed }
-          headerImg={ about.headerImg }
+          backgroundColor={ about.bannerBackgroundColor }
+          backgroundImage={ about.bannerBackgroundImage }
+          primaryColor={ about.primaryColor }
           iconImg={ about.iconImg }
-          iconSize={ about.iconSize }
         />
         <Navigation
           layout={ layout }

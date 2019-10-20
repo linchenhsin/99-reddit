@@ -16,29 +16,31 @@ function Toolbar( props: Props ) {
     sort, layout, onSortChange, onLayoutChange,
   } = props;
   const sortButtons = Object.values( SORT ).map( i => (
-    // $FlowFixMe
     <Button
+      // $FlowFixMe
       key={ i }
+      // $FlowFixMe
       onClick={ () => onSortChange( i ) }
       type="button"
     >
-      {i}
+      { i }
     </Button>
   ) );
   const layoutButtons = Object.values( LAYOUT ).map( i => (
-    // $FlowFixMe
     <Button
+      // $FlowFixMe
       key={ i }
+      // $FlowFixMe
       onClick={ () => onLayoutChange( i ) }
       type="button"
     >
-      {i}
+      { i }
     </Button>
   ) );
   return (
     <>
-      {sortButtons}
-      {layoutButtons}
+      { sortButtons }
+      { layoutButtons }
       <pre>
         { JSON.stringify( { sort, layout }, null, 2 ) }
       </pre>

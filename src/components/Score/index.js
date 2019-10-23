@@ -31,6 +31,7 @@ const downvoteIconStyle = {
 type Props = {
   layout: $Values<typeof LAYOUT>,
   score: number,
+  hide: boolean,
   vote: $Values<typeof VOTE>,
   onUpvote?: Function,
   onDownvote?: Function,
@@ -41,6 +42,7 @@ function Score( props: Props ) {
   const {
     layout,
     score,
+    hide,
     vote,
     onUpvote = () => { },
     onDownvote = () => { },
@@ -57,7 +59,8 @@ function Score( props: Props ) {
           iconStyle={ loading ? '' : upvoteIconStyle[ vote ] }
         />
         <div className={ `${ style.score } ${ scoreStyle[ vote ] }` }>
-          { !loading && formatNumber( score ) }
+          { !loading && !hide && formatNumber( score ) }
+          { !loading && hide && '•' }
         </div>
         <IconButton
           type="downvote"

@@ -34,7 +34,7 @@ function Thread( props: Props ) {
   const {
     layout = LAYOUT.CARD,
     model: {
-      id, score, numComments,
+      id, score, numComments, hideScore,
       author, authorFlairRichtext, createdUtc, stickied,
       title, linkFlairRichtext,
       contentType, selftextHtml, url,
@@ -95,6 +95,7 @@ function Thread( props: Props ) {
           layout={ layout }
           score={ score }
           vote={ vote }
+          hide={ hideScore }
           loading={ loading }
           onUpvote={ () => onUpvote( id ) }
           onDownvote={ () => onDownvote( id ) }

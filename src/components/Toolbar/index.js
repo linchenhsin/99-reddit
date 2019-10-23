@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 
 import SortControl from '~/components/SortControl';
 import LayoutControl from '~/components/LayoutControl';
+import NightModeButton from '~/components/NightModeButton';
 
-import { LAYOUT, SORT } from '~/constants';
+import { LAYOUT, SORT, MODE } from '~/constants';
 
 import style from './index.module.scss';
 
@@ -17,13 +18,15 @@ const innerStyle = {
 type Props = {
   sort: $Values<typeof SORT>,
   layout: $Values<typeof LAYOUT>,
+  mode: $Values<typeof MODE>,
   onSortChange: ( $Values<typeof SORT>, ) => void,
   onLayoutChange: ( $Values<typeof LAYOUT>, ) => void,
+  onModeChange: ( $Values<typeof MODE>, ) => void,
 }
 
 function Toolbar( props: Props ) {
   const {
-    sort, layout, onSortChange, onLayoutChange,
+    sort, layout, mode, onSortChange, onLayoutChange, onModeChange,
   } = props;
 
   const [ newLayout, setLayout ] = useState( innerStyle[ layout ] );
@@ -55,6 +58,11 @@ function Toolbar( props: Props ) {
         <SortControl
           value={ sort }
           onChange={ onSortChange }
+        />
+        <div className={ style.divider } />
+        <NightModeButton
+          mode={ mode }
+          onChange={ onModeChange }
         />
       </div>
     </div>

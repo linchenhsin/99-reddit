@@ -10,7 +10,7 @@ import {
 } from '~/constants';
 
 // actions
-import { setLayout } from '~/actions/preference';
+import { setLayout, setMode } from '~/actions/preference';
 import { vote } from '~/actions/subreddit';
 
 // thunk
@@ -101,10 +101,12 @@ class SubredditPage extends Component<Props> {
         <Toolbar
           sort={ sort }
           layout={ layout }
+          mode={ mode }
           onSortChange={ s => dispatch( fetchThreadsOnSortChange(
             subreddit, s, { limit: config.thread_limit }
           ) ) }
           onLayoutChange={ l => dispatch( setLayout( l ) ) }
+          onModeChange={ m => dispatch( setMode( m ) ) }
         />
         <Content
           layout={ layout }

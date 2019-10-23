@@ -1,6 +1,6 @@
 // @flow
 
-import { SET_LAYOUT, SET_SORT } from '~/actions/preference';
+import { SET_LAYOUT, SET_SORT, SET_MODE } from '~/actions/preference';
 
 import { SORT, LAYOUT, MODE } from '~/constants';
 
@@ -9,7 +9,7 @@ import type { Preference } from '~/types';
 const initialState = {
   sort: SORT.HOT,
   layout: LAYOUT.CARD,
-  mode: MODE.LIGHT,
+  mode: MODE.DARK,
 };
 
 export default function (
@@ -35,6 +35,15 @@ export default function (
       return {
         ...state,
         sort,
+      };
+    }
+    case SET_MODE: {
+      const {
+        payload: mode,
+      } = action;
+      return {
+        ...state,
+        mode,
       };
     }
     default:

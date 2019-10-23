@@ -2,16 +2,22 @@
 
 import { SET_LAYOUT, SET_SORT } from '~/actions/preference';
 
-import { SORT, LAYOUT } from '~/constants';
+import { SORT, LAYOUT, MODE } from '~/constants';
 
 import type { Preference } from '~/types';
 
 const initialState = {
   sort: SORT.HOT,
   layout: LAYOUT.CARD,
+  mode: MODE.LIGHT,
 };
 
-export default function ( state: Preference = initialState, action: {type: string, payload: any} ) {
+export default function (
+  state: Preference = initialState,
+  action: {
+    type: string, payload: any
+  }
+) {
   switch ( action.type ) {
     case SET_LAYOUT: {
       const {

@@ -1,10 +1,7 @@
 // @flow
 import React from 'react';
-// import { Button } from 'antd';
 
-import Button from '~/components/Button';
-
-// import style from './index.module.scss';
+import style from './index.module.scss';
 
 type Props = {
   type: 'comment' | 'gild' | 'share' | 'save' | 'hide' | 'report' | 'menu',
@@ -16,12 +13,14 @@ function ThreadButton( props: Props ) {
     type, text = '',
   } = props;
   const button = (
-    <Button
-      type={ type }
-      onClick={ () => console.log( type ) }
+    <button
+      type="button"
+      className={ style.button }
+      onClick={ console.log }
     >
+      <i className={ `icon icon-${ type } ${ style.icon }` } />
       { text }
-    </Button>
+    </button>
   );
 
   return button;

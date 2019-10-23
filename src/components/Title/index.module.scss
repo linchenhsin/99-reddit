@@ -1,0 +1,13 @@
+.container {
+  line-height: 22px;
+  display: flex;
+  align-content: flex-start;
+}
+
+.title {
+  color: var(--newCommunityTheme-titleText);
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+}

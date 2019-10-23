@@ -1,6 +1,40 @@
-.dropdown {
-  border: none;
-  &:after {
-    animation: 0s;
+$size: 16px;
+
+.button {
+  min-width: 25px;
+  white-space: nowrap;
+  word-break: normal;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  padding: 4px;
+  color: var(--newCommunityTheme-actionIcon);
+  &:hover,
+  &:focus {
+    background-color: var(--newRedditTheme-navIconFaded10);
+    outline: none;
   }
+  .icon {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 400;
+    height: $size;
+    width: $size;
+    font-size: $size;
+    line-height: $size;
+    margin-right: 4px;
+  }
+}
+
+.button + .button {
+  margin-left: 4px;
+}
+
+.text {
+  display: inline-block;
+  line-height: 1;
+  text-transform: capitalize;
+  vertical-align: middle;
+  color: var(--newCommunityTheme-postIcon);
 }

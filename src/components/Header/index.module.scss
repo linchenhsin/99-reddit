@@ -6,7 +6,7 @@
   &.background {
     background: no-repeat center / cover;
     background-position: center top;
-    height: 192px;
+    height: 208px;
     min-width: 260px;
   }
 }
@@ -15,12 +15,14 @@
   display: flex;
   align-items: center;
   margin: 10px;
-}
-
-.card {
-  max-width: 1200px;
-  width: 100%;
-  margin: auto;
+  &.card {
+    margin: 0px;
+  }
+  .card {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+  }
 }
 
 .icon {
@@ -40,4 +42,5 @@
   font-weight: 500;
   line-height: 26px;
   color: #fcfcfb;
+  margin-bottom: 2px;
 }

@@ -2,8 +2,8 @@
 
 const path = require( 'path' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
-
-const themePath = path.resolve( __dirname, './src/assets/styles/theme.less' );
+const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
+const MomentLocalesPlugin = require( 'moment-locales-webpack-plugin' );
 
 module.exports = {
   mode: 'development',
@@ -19,7 +19,6 @@ module.exports = {
     filename: '[name].js',
   },
   devServer: {
-    port: 3000,
     host: '0.0.0.0',
     inline: true,
     hot: true,
@@ -55,7 +54,7 @@ module.exports = {
             options: {
               sourceMap: true,
               modules: {
-                localIdentName: '[name]__[local]___[hash:base64:5]',
+                localIdentName: '[emoji][folder]__[local]___[hash:base64:5]',
               },
             },
           },
@@ -67,26 +66,9 @@ module.exports = {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader' ],
       },
-      // less
-      {
-        test: /\.less$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          {
-            loader: 'less-loader',
-            options: {
-              modifyVars: {
-                hack: `true; @import "${ themePath }";`,
-              },
-              javascriptEnabled: true,
-            },
-          },
-        ],
-      },
       // fonts
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: 'file-loader',
@@ -97,13 +79,22 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.svg$/,
+        use: [ '@svgr/webpack' ],
+      },
     ],
   },
   plugins: [
+    // To strip all locales except "en"
+    new MomentLocalesPlugin(),
     new HtmlWebpackPlugin( {
       inject: true,
       template: path.resolve( __dirname, './public/index.html' ),
     } ),
+    new CopyWebpackPlugin( [
+      { from: 'public/favicon.ico', to: 'favicon.ico' },
+    ] ),
   ],
   resolve: {
     alias: {

@@ -1,6 +1,6 @@
 // @flow
 
-import { LOADING_STATUS } from '~/constants';
+import { LOADING_STATUS, CONTENT_TYPE } from '~/constants';
 
 export type SubredditAbout = {
   description: string,
@@ -26,27 +26,32 @@ type FlairRichtextText = {
   t: string // text
 }
 
-type FlairRichtext = FlairRichtextEmoji | FlairRichtextText
+export type FlairRichtext = FlairRichtextEmoji | FlairRichtextText;
 
 export type ThreadModel = {
   author: string,
   authorFlairRichtext: FlairRichtext[], // tag before author
-  createdUtc: string,
+  contentType: $Values<typeof CONTENT_TYPE>,
+  createdUtc: number,
   downs: number,
   hideScore: boolean,
   id: string,
   linkFlairRichtext: FlairRichtext[], // tag after title
+  media?: {
+    type: string,
+    reddit_video: {},
+  },
   numComments: number,
   pinned: boolean,
   score: number,
-  selftextHtml: string, // content
+  selftextHtml: string, // text content
   spoiler: boolean,
-  sticked: boolean,
+  stickied: boolean,
   subreddit: string, // e.g. "DotA2"
   subredditNamePrefixed: string, // e.g. "r/DotA2"
   title: string,
   ups: number,
-  url: string,
+  url: string, // picture url
   visited: boolean,
 }
 

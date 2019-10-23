@@ -1,0 +1,20 @@
+.container {
+  animation: shine 1.5s ease infinite;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--newCommunityTheme-field),
+    var(--newCommunityTheme-inactive),
+    var(--newCommunityTheme-field)
+  );
+  background-size: 200%;
+}
+@keyframes shine {
+  0% {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}

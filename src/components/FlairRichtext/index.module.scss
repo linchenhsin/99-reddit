@@ -1,0 +1,27 @@
+.container {
+  background-color: var(--newCommunityTheme-flair);
+  color: var(--newRedditTheme-postFlairText);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: text-bottom;
+  white-space: pre;
+  margin-left: 0;
+  padding: 0 4px;
+}
+
+.emoji {
+  height: 16px;
+  width: 16px;
+  vertical-align: bottom;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+  display: inline-block;
+}

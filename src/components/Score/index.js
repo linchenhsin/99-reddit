@@ -5,7 +5,7 @@ import { LAYOUT, VOTE } from '~/constants';
 
 import { formatNumber } from './utils';
 
-import Button from '~/components/Button';
+import IconButton from '~/components/IconButton';
 
 import style from './index.module.scss';
 
@@ -32,36 +32,47 @@ type Props = {
   layout: $Values<typeof LAYOUT>,
   score: number,
   vote: $Values<typeof VOTE>,
-  onUpvote: () => {},
-  onDownvote: () => {},
+  onUpvote?: Function,
+  onDownvote?: Function,
+  loading: boolean,
 }
 
 function Score( props: Props ) {
   const {
-    layout, score, vote, onUpvote, onDownvote,
+    layout,
+    score,
+    vote,
+    onUpvote = () => { },
+    onDownvote = () => { },
+    loading,
   } = props;
 
   return (
-    <div className={ style.background }>
+    <div className={ `${ containerStyle[ layout ] } ${ style.background }` }>
       <div className={ `${ containerStyle[ layout ] } ${ style.container }` }>
-        <Button
+        <IconButton
           type="upvote"
           onClick={ onUpvote }
-          buttonStyle={ style.voteBtn }
-          iconStyle={ upvoteIconStyle[ vote ] }
+          buttonStyle={ style.upvoteBtn }
+          iconStyle={ loading ? '' : upvoteIconStyle[ vote ] }
         />
         <div className={ `${ style.score } ${ scoreStyle[ vote ] }` }>
-          { formatNumber( score ) }
+          { !loading && formatNumber( score ) }
         </div>
-        <Button
+        <IconButton
           type="downvote"
           onClick={ onDownvote }
-          buttonStyle={ style.voteBtn }
-          iconStyle={ downvoteIconStyle[ vote ] }
+          buttonStyle={ style.downvoteBtn }
+          iconStyle={ loading ? '' : downvoteIconStyle[ vote ] }
         />
       </div>
     </div>
   );
 }
+
+Score.defaultProps = {
+  onUpvote: () => { },
+  onDownvote: () => { },
+};
 
 export default Score;

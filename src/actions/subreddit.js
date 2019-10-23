@@ -15,6 +15,16 @@ export const updateAbout = ( payload: SubredditAbout ) => ( {
   payload,
 } );
 
+export const FETCHING_MORE_THREADS = 'FETCHING_MORE_THREADS';
+export const fetchingMoreThreads = () => ( {
+  type: FETCHING_MORE_THREADS,
+} );
+
+export const FETCHING_SORT_THREADS = 'FETCHING_SORT_THREADS';
+export const fetchingSortThreads = () => ( {
+  type: FETCHING_SORT_THREADS,
+} );
+
 export const ADD_THREADS = 'ADD_THREADS';
 export const addThreads = ( payload: {
   after: string,
@@ -25,14 +35,21 @@ export const addThreads = ( payload: {
   payload,
 } );
 
-export const UPVOTE = 'UPVOTE';
-export const upvote = ( payload: string ) => ( {
-  type: UPVOTE,
+export const ADD_THREADS_ON_SORT_CHANGE = 'ADD_THREADS_ON_SORT_CHANGE';
+export const addThreadsOnSortChange = ( payload: {
+  after: string,
+  before: string,
+  threadModels: ThreadModels
+} ) => ( {
+  type: ADD_THREADS_ON_SORT_CHANGE,
   payload,
 } );
 
-export const DOWNVOTE = 'DOWNVOTE';
-export const downvote = ( payload: string ) => ( {
-  type: DOWNVOTE,
+export const VOTE = 'VOTE';
+export const vote = ( payload: {
+  threadId: string,
+  vote: number,
+} ) => ( {
+  type: VOTE,
   payload,
 } );

@@ -25,17 +25,21 @@ type Thread = {
   data: {
     author: string,
     author_flair_richtext: FlairRichtext[], // tag before author
-    created_utc: string,
+    created_utc: number,
     downs: number,
     hide_score: boolean,
     id: string,
     link_flair_richtext: FlairRichtext[], // tag after title
+    media?: {
+      type: string,
+      reddit_video: {},
+    },
     num_comments: number,
     pinned: boolean,
     score: number,
     selftext_html: string, // content
     spoiler: boolean,
-    sticked: boolean, // TODO: whats this? ads?
+    stickied: boolean, // TODO: whats this? ads?
     subreddit: string, // e.g. "DotA2"
     subreddit_name_prefixed: string, // e.g. "r/DotA2"
     title: string,

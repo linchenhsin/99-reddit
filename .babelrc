@@ -1,9 +1,5 @@
 {
-  "presets": [
-    "@babel/env",
-    "@babel/react",
-    "@babel/flow"
-  ],
+  "presets": ["@babel/env", "@babel/react", "@babel/flow"],
   "plugins": [
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-class-properties",
@@ -11,16 +7,13 @@
     "@babel/transform-flow-strip-types",
     "@babel/plugin-transform-runtime",
     "react-hot-loader/babel",
-    [ "babel-plugin-root-import", {
-      "rootPathSuffix": "src",
-      "rootPathPrefix": "~"
-    } ],
-    [ "import", {
-      "libraryName": "antd",
-      "style": true
-    } ]
+    [
+      "babel-plugin-root-import",
+      {
+        "rootPathSuffix": "src",
+        "rootPathPrefix": "~"
+      }
+    ]
   ],
-  "ignore": [
-    "/src/**/*.test.js"
-  ]
+  "ignore": ["/src/**/*.test.js"]
 }

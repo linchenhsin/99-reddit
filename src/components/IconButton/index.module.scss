@@ -1,0 +1,31 @@
+$size: 14px;
+
+.button {
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: inherit;
+  height: 24px;
+  padding: 4px;
+  position: relative;
+  width: 24px;
+  color: var(--newCommunityTheme-actionIcon);
+  display: flex;
+  justify-content: center;
+  &:hover,
+  &:focus {
+    background-color: var(--newRedditTheme-navIconFaded10);
+    outline: none;
+  }
+  .icon {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 400;
+    height: $size;
+    width: $size;
+    font-size: $size;
+    line-height: $size;
+    &.iconPadding {
+      margin-right: 4px;
+    }
+  }
+}

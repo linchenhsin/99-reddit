@@ -8,11 +8,11 @@ export type UserModel = {
   name: string, // e.g. username
   displayNamePrefixed: string, // e.g. u/username
   iconImg: string,
-  iconSize: [number, number],
+  iconSize: [ number, number ],
 }
 
 export type Users = {
   models: {
-    [id: string]: UserModel,
+    [ id: string ]: UserModel,
   };
 }

@@ -1,8 +1,18 @@
 // @flow
-import React from 'react';
-import { Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+
+import SortControl from '~/components/SortControl';
+import LayoutControl from '~/components/LayoutControl';
 
 import { LAYOUT, SORT } from '~/constants';
+
+import style from './index.module.scss';
+
+const innerStyle = {
+  [ LAYOUT.CARD ]: style.card,
+  [ LAYOUT.CLASSIC ]: style.classic,
+  [ LAYOUT.COMPACT ]: style.compact,
+};
 
 type Props = {
   sort: $Values<typeof SORT>,
@@ -15,38 +25,40 @@ function Toolbar( props: Props ) {
   const {
     sort, layout, onSortChange, onLayoutChange,
   } = props;
-  const sortButtons = Object.values( SORT ).map( i => (
-    <Button
-      // $FlowFixMe
-      key={ i }
-      // $FlowFixMe
-      onClick={ () => onSortChange( i ) }
-      type="button"
-    >
-      { i }
-    </Button>
-  ) );
-  const layoutButtons = Object.values( LAYOUT ).map( i => (
-    <Button
-      // $FlowFixMe
-      key={ i }
-      // $FlowFixMe
-      onClick={ () => onLayoutChange( i ) }
-      type="button"
-    >
-      { i }
-    </Button>
-  ) );
+
+  const [ newLayout, setLayout ] = useState( innerStyle[ layout ] );
+  const [ isHovered, setHover ] = useState( false );
+  const [ waitForMouseLeave, setWait ] = useState( false );
+
+  useEffect( () => {
+    setWait( true );
+  }, [ layout ] );
+
+  useEffect( () => {
+    if ( !isHovered && waitForMouseLeave ) {
+      setLayout( innerStyle[ layout ] );
+    }
+  }, [ isHovered ] );
+
   return (
-    <>
-      { sortButtons }
-      { layoutButtons }
-      <pre>
-        { JSON.stringify( { sort, layout }, null, 2 ) }
-      </pre>
-    </>
+    <div
+      className={ style.container }
+      onMouseEnter={ () => setHover( true ) }
+      onMouseLeave={ () => setHover( false ) }
+    >
+      <div className={ `${ style.innerContainer } ${ newLayout }` }>
+        <LayoutControl
+          value={ layout }
+          onChange={ onLayoutChange }
+        />
+        <div className={ style.divider } />
+        <SortControl
+          value={ sort }
+          onChange={ onSortChange }
+        />
+      </div>
+    </div>
   );
 }
-
 
 export default Toolbar;

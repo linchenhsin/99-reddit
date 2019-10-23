@@ -1,3 +1,11 @@
 .container {
-  background-color: var(--newCommunityTheme-canvas);
+  padding: 20px 24px;
+
+  @media (max-width: 639px) {
+    padding: 0;
+  }
+}
+
+.loaderContainer.card {
+  margin-top: 10px;
 }

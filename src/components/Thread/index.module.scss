@@ -1,11 +1,194 @@
-.card {
+$card-border-radius: 4px;
+
+// basic thread
+.thread {
   transition: 0s;
   cursor: pointer;
   border: 1px solid var(--newCommunityTheme-postLine);
   transition: color 0.5s, fill 0.5s, box-shadow 0.5s;
   transition-property: color, fill, box-shadow;
+  background-color: var(--newCommunityTheme-postTransparent20);
   color: var(--newCommunityTheme-actionIcon);
   &:hover {
     border-color: var(--newCommunityTheme-postIcon);
+    & + .classicContainer {
+      border-top-color: var(--newCommunityTheme-postIcon);
+    }
+  }
+  margin: auto;
+  border-radius: $card-border-radius;
+}
+
+// in classic & compact
+.expandBtn {
+  height: 24px;
+  width: 24px;
+}
+.expandIcon {
+  vertical-align: middle;
+  font-weight: 400;
+  height: 16px;
+  width: 16px;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+// CardLayout
+.cardContainer + .cardContainer {
+  margin-top: 10px;
+}
+.cardContainer {
+  max-width: 640px;
+  margin: auto;
+  display: flex;
+  background-color: var(--canvas);
+  border-radius: $card-border-radius;
+  table {
+    display: none;
+  }
+  .cardScore {
+    border-top-left-radius: $card-border-radius;
+    border-bottom-left-radius: $card-border-radius;
+    width: 40px;
+    background-color: var(--newCommunityTheme-postTransparent20);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 8px 4px;
+  }
+  .cardRight {
+    border-top-right-radius: $card-border-radius;
+    border-bottom-right-radius: $card-border-radius;
+    background: var(--background);
+    width: 100%;
+    padding: 8px 5px 0 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .cardTopRight {
+      .cardAuthor {
+      }
+      .cardTitle {
+        font-size: 18px;
+      }
+      .cardContent {
+      }
+    }
+    .cardButtons {
+      margin-bottom: 4px;
+    }
+  }
+}
+
+// ClassicLayout
+.classicContainer {
+  display: flex;
+  border-radius: 0;
+  border: thin solid var(--newCommunityTheme-postLine);
+  margin-bottom: -1px;
+  background-color: var(--canvas);
+  z-index: 0;
+  &:first-child {
+    border-radius: $card-border-radius $card-border-radius 0 0;
+    .classicScore {
+      border-radius: $card-border-radius 0 0 0;
+    }
+    .classicRight {
+      border-radius: 0 $card-border-radius 0 0;
+    }
+  }
+
+  &.expand {
+    height: unset;
+  }
+
+  &:hover {
+    border: thin solid var(--newCommunityTheme-postIcon);
+    z-index: 10;
+  }
+
+  .classicScore {
+    width: 40px;
+    background-color: var(--newCommunityTheme-postTransparent20);
+    padding: 8px 4px 8px 0;
+    top: 0;
+  }
+  .classicRight {
+    background: var(--background);
+    width: 100%;
+    .classicTopRight {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 8px;
+      .classicTitle {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+      }
+    }
+    .classicButtons {
+      display: flex;
+      flex-direction: row;
+    }
+    .classicDivider {
+      border-right: 1px solid var(--newCommunityTheme-line);
+      height: 16px;
+      margin: 4px;
+      vertical-align: middle;
+    }
+  }
+  .classicContent {
+    padding: 5px 8px;
+  }
+}
+
+// CompactLayout
+.compactContainer {
+  background: var(--background);
+  border-width: 0;
+  border-radius: 0;
+  &:hover {
+    border-width: 1px;
+  }
+  .compactTop {
+    display: flex;
+    justify-content: space-between;
+    .compactTopLeft {
+      display: flex;
+      flex-direction: row;
+      .compactScoreWrapper {
+        background-color: var(--canvas);
+        .compactScore {
+          height: 100%;
+          background-color: var(--newCommunityTheme-postTransparent20);
+          border-right: 1px solid var(--newCommunityTheme-line);
+        }
+      }
+      .compactContentButtonDiv {
+        padding: 3px 0;
+        margin: 0 8px;
+      }
+      .compactTitleAuthor {
+        padding: 3px 0;
+        .compactTitle {
+          font-size: 14px;
+        }
+        .compactAuthor {
+        }
+      }
+    }
+    .compactButtons {
+      align-self: center;
+      padding: 0 4px;
+    }
+  }
+  .compactContent {
+    display: none;
+    &.expand {
+      display: block;
+      padding: 5px 8px;
+    }
   }
 }

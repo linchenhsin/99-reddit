@@ -1,6 +1,5 @@
 // @flow
 
-
 import axios, { AxiosInstance } from 'axios';
 
 /**

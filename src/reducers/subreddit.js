@@ -5,9 +5,11 @@ import { LOADING_STATUS, VOTE } from '~/constants';
 import {
   UPDATE_ABOUT_LOADING_STATUS,
   UPDATE_ABOUT,
+  FETCHING_MORE_THREADS,
+  FETCHING_SORT_THREADS,
   ADD_THREADS,
-  UPVOTE,
-  DOWNVOTE,
+  ADD_THREADS_ON_SORT_CHANGE,
+  VOTE as VOTE_ACTION,
 } from '../actions/subreddit';
 
 import type { Subreddit } from '~/types';
@@ -31,6 +33,9 @@ const initialState = {
   threadsModels: {},
   threadsOrder: [],
   threadsVotes: {},
+  hasMoreThreads: true,
+  isFetchingSortThreads: false,
+  isFetchingMoreThreads: true,
 };
 
 export default function (
@@ -57,9 +62,24 @@ export default function (
         about,
       };
     }
+    case FETCHING_MORE_THREADS: {
+      return {
+        ...state,
+        isFetchingMoreThreads: true,
+      };
+    }
+    case FETCHING_SORT_THREADS: {
+      return {
+        ...state,
+        isFetchingSortThreads: true,
+        threadsOrder: [],
+      };
+    }
     case ADD_THREADS: {
       const {
-        payload: { after, before, threadModels },
+        payload: {
+          after, before, threadModels, hasMore,
+        },
       } = action;
       const order = Object.keys( threadModels );
       return {
@@ -71,36 +91,43 @@ export default function (
           ...threadModels,
         },
         threadsOrder: [ ...state.threadsOrder, ...order ],
+        isFetchingMoreThreads: false,
+        hasMoreThreads: hasMore,
       };
     }
-    case UPVOTE: {
+    case ADD_THREADS_ON_SORT_CHANGE: {
       const {
-        payload: threadId,
+        payload: {
+          after, before, threadModels, hasMore,
+        },
       } = action;
-
-      const oldVote = state.threadsVotes[ threadId ] || VOTE.NO_VOTE;
+      const order = Object.keys( threadModels );
+      return {
+        ...state,
+        after,
+        before,
+        threadsModels: {
+          ...state.threadsModels,
+          ...threadModels,
+        },
+        threadsOrder: [ ...order ],
+        isFetchingSortThreads: false,
+        hasMoreThreads: hasMore,
+      };
+    }
+    case VOTE_ACTION: {
+      const {
+        payload: { threadId, vote },
+      } = action;
+      const oldVote = state.threadsVotes[ threadId ] || VOTE.UNVOTE;
       const model = state.threadsModels[ threadId ];
       let { ups, downs, score } = model;
-      let vote;
-      switch ( oldVote ) {
-        // downvote to upvote
-        case VOTE.DOWNVOTE:
-          vote = VOTE.UPVOTE;
-          break;
-        // upvote to no vote
-        case VOTE.UPVOTE:
-          vote = VOTE.NO_VOTE;
-          break;
-        // no vote to upvote
-        case VOTE.NO_VOTE:
-        default:
-          vote = VOTE.UPVOTE;
-          break;
-      }
+      const newVote = vote === oldVote ? VOTE.UNVOTE : vote;
+      const diff = newVote - oldVote;
 
-      score += vote - oldVote;
-      ups += vote - oldVote;
-      downs += oldVote - vote;
+      score += diff;
+      ups += diff;
+      downs -= diff;
 
       return {
         ...state,
@@ -115,52 +142,7 @@ export default function (
         },
         threadsVotes: {
           ...state.threadsVotes,
-          [ threadId ]: vote,
-        },
-      };
-    }
-    case DOWNVOTE: {
-      const {
-        payload: threadId,
-      } = action;
-      const oldVote = state.threadsVotes[ threadId ] || VOTE.NO_VOTE;
-      const model = state.threadsModels[ threadId ];
-      let { ups, downs, score } = model;
-      let vote;
-      switch ( oldVote ) {
-        // downvote to no vote
-        case VOTE.DOWNVOTE:
-          vote = VOTE.NO_VOTE;
-          break;
-        // upvote to downvote
-        case VOTE.UPVOTE:
-          vote = VOTE.DOWNVOTE;
-          break;
-        // no vote to downvote
-        case VOTE.NO_VOTE:
-        default:
-          vote = VOTE.DOWNVOTE;
-          break;
-      }
-
-      score += vote - oldVote;
-      ups += vote - oldVote;
-      downs += oldVote - vote;
-
-      return {
-        ...state,
-        threadsModels: {
-          ...state.threadsModels,
-          [ threadId ]: {
-            ...model,
-            ups,
-            downs,
-            score,
-          },
-        },
-        threadsVotes: {
-          ...state.threadsVotes,
-          [ threadId ]: vote,
+          [ threadId ]: newVote,
         },
       };
     }

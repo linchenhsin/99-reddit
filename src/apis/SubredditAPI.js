@@ -4,6 +4,7 @@
 import { AxiosInstance } from 'axios';
 import { subredditInstance } from './transportService';
 
+import { CONTENT_TYPE } from '~/constants';
 import type { SubredditAbout, ThreadModels } from '~/types';
 import type { SubredditAboutData, SubredditSearchParams, SubredditSearchData } from './types';
 
@@ -67,23 +68,29 @@ class SubredditAPI {
   search( subreddit: string, sort: string, params?: SubredditSearchParams ): Promise<{
     after: string,
     before: string,
+    hasMore: boolean,
     threadModels: ThreadModels
   }> {
     return new Promise( ( resolve, reject ) => {
       this.instance( {
         method: 'GET',
         url: `${ subreddit }/${ sort }.json`,
-        params,
+        params: {
+          ...params,
+          raw_json: 1,
+        },
       } ).then( ( response: { data: SubredditSearchData } ) => {
         const {
           data: {
             data: {
+              dist,
               after,
               before,
               children,
             },
           },
         } = response;
+        const hasMore = dist > 0;
         const threadModels = {};
         children.forEach( thread => {
           const {
@@ -95,12 +102,13 @@ class SubredditAPI {
               hide_score,
               id,
               link_flair_richtext,
+              media,
               num_comments,
               pinned,
               score,
               selftext_html,
               spoiler,
-              sticked,
+              stickied,
               subreddit_name_prefixed,
               title,
               ups,
@@ -108,20 +116,40 @@ class SubredditAPI {
               visited,
             },
           } = thread;
+
+          let contentType;
+          if ( selftext_html ) {
+            contentType = CONTENT_TYPE.TEXT;
+          }
+          if ( ( /\.(gif|jpg|jpeg|tiff|png)$/i ).test( url ) ) {
+            contentType = CONTENT_TYPE.IMAGE;
+          }
+          if ( media ) {
+            if ( media.type || media.reddit_video ) {
+              contentType = CONTENT_TYPE.VIDEO;
+            } else {
+              contentType = CONTENT_TYPE.LINK;
+            }
+          }
+          if ( !contentType && url ) {
+            contentType = CONTENT_TYPE.OUTBOUND_LINK;
+          }
           threadModels[ id ] = {
             author,
             authorFlairRichtext: author_flair_richtext,
             createdUtc: created_utc,
+            contentType,
             downs,
             hideScore: hide_score,
             id,
             linkFlairRichtext: link_flair_richtext,
+            media,
             numComments: num_comments,
             pinned,
             score,
             selftextHtml: selftext_html,
             spoiler,
-            sticked,
+            stickied,
             subreddit,
             subredditNamePrefixed: subreddit_name_prefixed,
             title,
@@ -130,7 +158,9 @@ class SubredditAPI {
             visited,
           };
         } );
-        resolve( { after, before, threadModels } );
+        resolve( {
+          after, before, hasMore, threadModels,
+        } );
       } )
         .catch( error => {
           reject( error );

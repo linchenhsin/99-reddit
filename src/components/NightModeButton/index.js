@@ -24,10 +24,12 @@ function NightModeButton( props: Props ) {
   } = props;
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex="0"
       className={ style.container }
       onClick={ () => { onChange( mode === MODE.LIGHT ? MODE.DARK : MODE.LIGHT ); } }
+      onKeyDown={ () => { onChange( mode === MODE.LIGHT ? MODE.DARK : MODE.LIGHT ); } }
     >
       <span>
         <NightModeSvg className={ style.icon } />
@@ -45,7 +47,7 @@ function NightModeButton( props: Props ) {
           <div className={ style.circle } />
         </button>
       </span>
-    </button>
+    </div>
   );
 }
 export default NightModeButton;

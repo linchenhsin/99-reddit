@@ -17,10 +17,10 @@ $offset: calc((100% - 976px) / 2);
 
   &.card {
     left: $offset;
-    @media (min-width: 640px) {
+    @media (min-width: 1100px) {
       right: 24px;
     }
-    @media (max-width: 639px) {
+    @media (max-width: 1009px) {
       left: 8px;
     }
   }

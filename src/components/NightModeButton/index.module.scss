@@ -3,6 +3,7 @@
   fill: var(--newCommunityTheme-actionIcon);
   display: flex;
   outline: none;
+  cursor: pointer;
 }
 
 .icon {
@@ -18,10 +19,13 @@
   display: inline-block;
   vertical-align: middle;
   margin-right: 10px;
+  user-select: none;
+  @media (max-width: 639px) {
+    display: none;
+  }
 }
 
 .switch {
-  cursor: pointer;
   display: flex;
   -ms-flex-pack: start;
   background-color: var(--newCommunityTheme-navIconFaded10);

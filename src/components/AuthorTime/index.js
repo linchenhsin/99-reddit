@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import moment from 'moment';
+import { formatDistanceStrict } from 'date-fns';
 
 import FlairRichtext from '~/components/FlairRichtext';
 
@@ -18,8 +18,7 @@ function AuthorTime( props: Props ) {
   const {
     author, authorFlairRichtext, createdUtc, stickied,
   } = props;
-  const momentTime = moment.unix( createdUtc );
-  const date = new Date( momentTime );
+  const date = new Date( createdUtc * 1000 );
 
   return (
     <div className={ style.container }>
@@ -34,7 +33,7 @@ function AuthorTime( props: Props ) {
         className={ `${ style.timeDiff } ${ style.tooltip }` }
         data-date={ date.toString() }
       >
-        { momentTime.fromNow() }
+        { formatDistanceStrict( date, new Date(), { addSuffix: true } ) }
       </span>
       {
         stickied

@@ -3,7 +3,6 @@
 const path = require( 'path' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
-const MomentLocalesPlugin = require( 'moment-locales-webpack-plugin' );
 
 module.exports = {
   mode: 'development',
@@ -86,8 +85,6 @@ module.exports = {
     ],
   },
   plugins: [
-    // To strip all locales except "en"
-    new MomentLocalesPlugin(),
     new HtmlWebpackPlugin( {
       inject: true,
       template: path.resolve( __dirname, './public/index.html' ),

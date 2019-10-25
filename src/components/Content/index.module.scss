@@ -1,11 +1,36 @@
 .container {
   padding: 20px 24px;
+  display: flex;
+  justify-content: center;
 
   @media (max-width: 639px) {
     padding: 0;
   }
+
+  .threads {
+    width: 100%;
+  }
+  .threads.card {
+    @media (min-width: 960px) {
+      width: 640px;
+    }
+  }
+  .widgets {
+    margin-left: 24px;
+    flex: 0 0 312px;
+    width: 312px;
+    @media (max-width: 959px) {
+      display: none;
+    }
+  }
+}
+
+.loaderContainer {
+  width: 100%;
 }
 
 .loaderContainer.card {
-  margin-top: 10px;
+  @media (min-width: 960px) {
+    width: 640px;
+  }
 }

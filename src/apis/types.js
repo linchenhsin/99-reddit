@@ -5,6 +5,21 @@
  */
 
 /**
+ * Ad API
+ */
+export type AdData = {
+  [ id: string ]: {
+    id: string,
+    type: 'ad',
+    data: {
+      imageUrl: string,
+      linkUrl: string,
+      caption: string,
+    }
+  }
+}
+
+/**
  * Subreddit API
  */
 type FlairRichtextEmoji = {
@@ -79,6 +94,13 @@ export type SubredditAboutData = {
     primary_color: string,
     title: string, // e.g. Dota 2 on Reddit
     display_name_prefixed: string, // e.g. "r/DotA2"
+
+    // community details
+    community_icon: string,
+    subscribers: number, // members online
+    accounts_active: number, // num of members
+    created_utc: number, // for cake day
+    public_description: string, // Dota
   }
 }
 

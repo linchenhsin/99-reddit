@@ -1,0 +1,11 @@
+{
+  "amandaAd": {
+    "id": "amandaAd",
+    "type": "ad",
+    "data": {
+      "imageUrl": "/images/amanda.jpg",
+      "linkUrl": "mailto:amanda.ng@99.co?subject=I%20am%20hungry!!!&body=AMANDABAOFORME",
+      "caption": "Hungry? Enjoy FREE delivery when you use promo code AMANDABAOFORME"
+    }
+  }
+}

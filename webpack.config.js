@@ -3,6 +3,7 @@
 const path = require( 'path' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
+const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
 
 module.exports = {
   mode: 'development',
@@ -85,12 +86,14 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin( {
       inject: true,
       template: path.resolve( __dirname, './public/index.html' ),
     } ),
     new CopyWebpackPlugin( [
       { from: 'public/favicon.ico', to: 'favicon.ico' },
+      { from: 'public/images', to: 'images' },
     ] ),
   ],
   resolve: {

@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 // components
 import Thread from '~/components/Thread';
+import Widget from '~/components/Widget';
 
 import { LAYOUT, VOTE } from '~/constants';
 
@@ -39,45 +40,57 @@ type Props = {
 
 function Content( props: Props ) {
   const {
-    // eslint-disable-next-line no-unused-vars
     layout, threads, threads: { fetching, hasMore }, widgets, votes, onUpvote, onDownvote,
     loadMore,
   } = props;
+
   return (
     <div className={ style.container }>
-      <InfiniteScroll
-        pageStart={ 0 }
-        loadMore={ loadMore }
-        hasMore={ !fetching && hasMore }
-      >
+      <div className={ `${ style.threads } ${ style[ layout ] }` }>
+        <InfiniteScroll
+          pageStart={ 0 }
+          loadMore={ loadMore }
+          hasMore={ !fetching && hasMore }
+        >
+          {
+            threads.order.map( key => (
+              <Thread
+                key={ `thread-${ key }` }
+                layout={ layout }
+                model={ threads.models[ key ] }
+                vote={ votes[ key ] }
+                onUpvote={ onUpvote }
+                onDownvote={ onDownvote }
+              />
+            ) )
+          }
+        </InfiniteScroll>
         {
-          threads.order.map( key => (
-            <Thread
-              key={ `thread-${ key }` }
-              layout={ layout }
-              model={ threads.models[ key ] }
-              vote={ votes[ key ] }
-              onUpvote={ onUpvote }
-              onDownvote={ onDownvote }
+          hasMore && (
+            <div className={ `${ style.loaderContainer } ${ style[ layout ] }` }>
+              {
+                Array.from( Array( LOADING_THREADS_NUM[ layout ] ).keys() ).map( i => (
+                  <Thread
+                    key={ `thread-loading-${ i }` }
+                    loading
+                    layout={ layout }
+                  />
+                ) )
+              }
+            </div>
+          )
+        }
+      </div>
+      <div className={ style.widgets }>
+        {
+          widgets.order.map( key => (
+            <Widget
+              key={ `widget-${ key }` }
+              model={ widgets.models[ key ] }
             />
           ) )
         }
-      </InfiniteScroll>
-      {
-        hasMore && (
-          <div className={ `${ style.loaderContainer } ${ style[ layout ] }` }>
-            {
-              Array.from( Array( LOADING_THREADS_NUM[ layout ] ).keys() ).map( i => (
-                <Thread
-                  key={ `thread-loading-${ i }` }
-                  loading
-                  layout={ layout }
-                />
-              ) )
-            }
-          </div>
-        )
-      }
+      </div>
     </div>
   );
 }

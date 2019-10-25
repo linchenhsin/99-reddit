@@ -13,6 +13,13 @@ export type SubredditAbout = {
   primaryColor: string,
   title: string, // e.g. Dota 2 on Reddit
   displayNamePrefixed: string,
+
+  // community details
+  communityIcon: string,
+  subscribers: number, // members online
+  accountsActive: number, // num of members
+  createdUtc: number, // for cake day
+  publicDescription: string, // Dota
 }
 
 type FlairRichtextEmoji = {

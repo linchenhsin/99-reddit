@@ -37,3 +37,8 @@ export const CONTENT_TYPE = {
   LINK: 'link',
   OUTBOUND_LINK: 'outbound_link',
 };
+
+export const WIDGET_TYPE = {
+  COMMUNITY: 'community',
+  AD: 'ad',
+};

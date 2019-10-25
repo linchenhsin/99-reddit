@@ -29,6 +29,12 @@ const initialState = {
     bannerBackgroundImage: '',
     title: 'Reddit',
     displayNamePrefixed: '',
+
+    communityIcon: '',
+    subscribers: 0,
+    accountsActive: 0,
+    createdUtc: 0,
+    publicDescription: '',
   },
   threadsModels: {},
   threadsOrder: [],

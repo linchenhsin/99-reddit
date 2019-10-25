@@ -34,12 +34,9 @@ $card-border-radius: 4px;
 }
 
 // CardLayout
-.cardContainer + .cardContainer {
-  margin-top: 10px;
-}
 .cardContainer {
   max-width: 640px;
-  margin: auto;
+  margin: auto auto 10px auto;
   display: flex;
   background-color: var(--canvas);
   border-radius: $card-border-radius;
@@ -182,6 +179,7 @@ $card-border-radius: 4px;
     .compactButtons {
       align-self: center;
       padding: 0 4px;
+      min-width: 90px;
     }
   }
   .compactContent {

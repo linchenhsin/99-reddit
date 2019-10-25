@@ -37,6 +37,12 @@ class SubredditAPI {
               primary_color,
               title,
               display_name_prefixed,
+
+              community_icon,
+              subscribers,
+              accounts_active,
+              created_utc,
+              public_description,
             },
           },
         } = response;
@@ -51,6 +57,12 @@ class SubredditAPI {
           primaryColor: primary_color,
           title,
           displayNamePrefixed: display_name_prefixed,
+
+          communityIcon: community_icon,
+          subscribers,
+          accountsActive: accounts_active,
+          createdUtc: created_utc,
+          publicDescription: public_description,
         };
         resolve( data );
       } )

@@ -14,7 +14,9 @@ import { setLayout, setMode } from '~/actions/preference';
 import { vote } from '~/actions/subreddit';
 
 // thunk
-import { fetchSubredditAbout, fetchThreads, fetchThreadsOnSortChange } from './thunk';
+import {
+  fetchSubredditAbout, fetchThreads, fetchThreadsOnSortChange, fetchAds,
+} from './thunk';
 
 // components
 import Content from '~/components/Content';
@@ -29,7 +31,7 @@ import config from '~/config';
 import mockNav from '~/../__mocks__/navigation.json';
 
 // types
-import type { SubredditAbout, ThreadModels } from '~/types';
+import type { SubredditAbout, ThreadModels, WidgetModels } from '~/types';
 
 // style
 import style from './index.module.scss';
@@ -55,6 +57,8 @@ type Props = {
   hasMoreThreads: boolean,
   isFetchingSortThreads: boolean,
   isFetchingMoreThreads: boolean,
+  widgetsModels: WidgetModels,
+  widgetsOrder: string[],
 }
 
 class SubredditPage extends Component<Props> {
@@ -64,74 +68,87 @@ class SubredditPage extends Component<Props> {
     } = this.props;
     dispatch( fetchSubredditAbout( subreddit ) );
     dispatch( fetchThreads( subreddit, sort, { limit: config.thread_limit } ) );
+    dispatch( fetchAds() );
   }
 
   render() {
     const {
-      subreddit,
       dispatch,
-      layout, sort,
-      after,
+
+      // subreddit
+      subreddit,
       about,
+
+      // nav
       navItems,
+
+      // toolbar
+      layout, mode,
+
+      // threads
+      sort, after,
       threadsModels, threadsOrder, threadsVotes,
       hasMoreThreads,
       isFetchingSortThreads,
       isFetchingMoreThreads,
-      mode,
+
+      // widgets
+      widgetsModels, widgetsOrder,
     } = this.props;
     return (
-      <div className={ `SubredditVars${ mode }${ subreddit } ${ style.pageBody }` }>
-        <Helmet>
-          <title>{ about.title }</title>
-        </Helmet>
-        <Header
-          layout={ layout }
-          title={ about.displayNamePrefixed }
-          backgroundColor={ about.bannerBackgroundColor }
-          backgroundImage={ about.bannerBackgroundImage }
-          primaryColor={ about.primaryColor }
-          iconImg={ about.iconImg }
-        />
-        <Navigation
-          layout={ layout }
-          defaultSelectedKey="posts"
-          items={ navItems }
-        />
-        <Toolbar
-          sort={ sort }
-          layout={ layout }
-          mode={ mode }
-          onSortChange={ s => dispatch( fetchThreadsOnSortChange(
-            subreddit, s, { limit: config.thread_limit }
-          ) ) }
-          onLayoutChange={ l => dispatch( setLayout( l ) ) }
-          onModeChange={ m => dispatch( setMode( m ) ) }
-        />
-        <Content
-          layout={ layout }
-          onUpvote={ tid => dispatch( vote( { threadId: tid, vote: VOTE.UPVOTE } ) ) }
-          onDownvote={ tid => dispatch( vote( { threadId: tid, vote: VOTE.DOWNVOTE } ) ) }
-          loadMore={ () => dispatch( fetchThreads(
-            subreddit, sort, { limit: config.thread_limit, after }
-          ) ) }
-          threads={
-            {
-              models: threadsModels,
-              order: threadsOrder,
-              votes: threadsVotes,
-              fetching: isFetchingMoreThreads || isFetchingSortThreads,
-              hasMore: hasMoreThreads,
+      <div className={ `SubredditVars${ mode } ${ style.pageBody }` }>
+        <div className={ `SubredditVars${ mode }${ subreddit }` }>
+          <Helmet>
+            <title>{ about.title }</title>
+          </Helmet>
+          <Header
+            layout={ layout }
+            title={ about.displayNamePrefixed }
+            backgroundColor={ about.bannerBackgroundColor }
+            backgroundImage={ about.bannerBackgroundImage }
+            primaryColor={ about.primaryColor }
+            iconImg={ about.iconImg }
+          />
+          <Navigation
+            layout={ layout }
+            defaultSelectedKey="posts"
+            items={ navItems }
+          />
+          <Toolbar
+            sort={ sort }
+            layout={ layout }
+            mode={ mode }
+            onSortChange={ s => dispatch( fetchThreadsOnSortChange(
+              subreddit, s, { limit: config.thread_limit }
+            ) ) }
+            onLayoutChange={ l => dispatch( setLayout( l ) ) }
+            onModeChange={ m => dispatch( setMode( m ) ) }
+          />
+          <Content
+            layout={ layout }
+            onUpvote={ tid => dispatch( vote( { threadId: tid, vote: VOTE.UPVOTE } ) ) }
+            onDownvote={ tid => dispatch( vote( { threadId: tid, vote: VOTE.DOWNVOTE } ) ) }
+            loadMore={ () => dispatch( fetchThreads(
+              subreddit, sort, { limit: config.thread_limit, after }
+            ) ) }
+            threads={
+              {
+                models: threadsModels,
+                order: threadsOrder,
+                votes: threadsVotes,
+                fetching: isFetchingMoreThreads || isFetchingSortThreads,
+                hasMore: hasMoreThreads,
+              }
             }
-          }
-          widgets={
-            {
-              models: {},
-              order: [],
+            widgets={
+              {
+                models: widgetsModels,
+                order: widgetsOrder,
+              }
             }
-          }
-          votes={ threadsVotes }
-        />
+            votes={ threadsVotes }
+          />
+        </div>
       </div>
     );
   }
@@ -151,6 +168,8 @@ function select( state ) {
     threadsModels: state.subreddit.threadsModels,
     threadsOrder: state.subreddit.threadsOrder,
     threadsVotes: state.subreddit.threadsVotes,
+    widgetsModels: state.widgets.models,
+    widgetsOrder: state.widgets.order,
   };
 }
 

@@ -81,7 +81,7 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.8",
     "lint-staged": "^9.4.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "npm-check": "^5.9.0",
     "retire": "^2.0.3",
     "sass-loader": "^8.0.0",
